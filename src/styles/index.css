@@ -1,0 +1,354 @@
+@import '@fontsource-variable/source-serif-4/opsz.css';
+@import '@fontsource-variable/source-serif-4/opsz-italic.css';
+@import '@fontsource-variable/albert-sans';
+@import '@fontsource-variable/azeret-mono';
+@import 'tailwindcss';
+
+/*
+ * "Kipinästä peiliin" – design tokens.
+ * Palette is taken from the nameplate logo: the plate's black → steel → polished
+ * white gradient, and the orange of its welded-looking rim (#FF6229 in the
+ * original theme CSS).
+ */
+@theme {
+  --color-ink: #0b0c0e;
+  --color-ink-2: #121417;
+  --color-ink-3: #1a1d21;
+  --color-steel-800: #24282d;
+  --color-steel-700: #2f343a;
+  --color-steel-600: #4a5058;
+  --color-steel-500: #646b74;
+  --color-steel-400: #8d939b;
+  --color-steel-300: #b6bbc1;
+  --color-steel-200: #d5d8dc;
+  --color-steel-100: #e6e8ea;
+  --color-mirror: #eef0f1;
+  --color-mirror-2: #f7f7f6;
+  --color-arc: #ff6229;
+  --color-arc-hot: #ff8a52;
+  --color-arc-deep: #b23a0e;
+  --color-argon: #d6ebff;
+
+  --font-display: 'Source Serif 4 Variable', 'Times New Roman', Times, serif;
+  --font-sans: 'Albert Sans Variable', ui-sans-serif, system-ui, 'Segoe UI', sans-serif;
+  --font-mono: 'Azeret Mono Variable', ui-monospace, 'SFMono-Regular', Consolas, monospace;
+
+  --ease-weld: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --breakpoint-xs: 26rem;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+    scroll-behavior: auto;
+    background: var(--color-ink);
+    color-scheme: dark;
+  }
+
+  body {
+    margin: 0;
+    background: var(--color-ink);
+    color: var(--color-steel-100);
+    font-family: var(--font-sans);
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: clip;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    font-optical-sizing: auto;
+    font-weight: 620;
+    line-height: 1.02;
+    letter-spacing: -0.018em;
+    text-wrap: balance;
+    margin: 0;
+  }
+
+  p {
+    margin: 0;
+    text-wrap: pretty;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  img,
+  svg,
+  video,
+  iframe {
+    display: block;
+    max-width: 100%;
+  }
+
+  button {
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+  }
+
+  ::selection {
+    background: var(--color-arc);
+    color: var(--color-ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-arc);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  [hidden] {
+    display: none !important;
+  }
+}
+
+@layer components {
+  .shell {
+    width: 100%;
+    max-width: 92rem;
+    margin-inline: auto;
+    padding-inline: clamp(1rem, 4vw, 3.5rem);
+  }
+
+  /* Technical label – the "engraving" voice of the site. */
+  .label {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .display-xl {
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 8.4vw, 9.25rem);
+    font-weight: 640;
+    line-height: 0.9;
+    letter-spacing: -0.03em;
+  }
+
+  .display-lg {
+    font-family: var(--font-display);
+    font-size: clamp(2.4rem, 5.6vw, 5.75rem);
+    font-weight: 620;
+    line-height: 0.95;
+    letter-spacing: -0.025em;
+  }
+
+  .display-md {
+    font-family: var(--font-display);
+    font-size: clamp(1.9rem, 3.6vw, 3.4rem);
+    font-weight: 600;
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+  }
+
+  .lead {
+    font-size: clamp(1.08rem, 1.35vw, 1.3rem);
+    line-height: 1.55;
+  }
+
+  /* The logo's plate gradient, used as a recurring surface. */
+  .plate {
+    background: linear-gradient(180deg, #000 3%, #7f7f7f 50%, #f3f3f3 97%);
+  }
+
+  /* Polished-metal text: light sweeps across as --sheen moves (0–100). */
+  .text-mirror {
+    background-image: linear-gradient(
+      100deg,
+      #8d939b 0%,
+      #f7f7f6 calc(var(--sheen, 40) * 1% - 12%),
+      #ffffff calc(var(--sheen, 40) * 1%),
+      #9aa0a7 calc(var(--sheen, 40) * 1% + 14%),
+      #d5d8dc 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Authentic brushed-aluminium texture from the original ishp.fi theme. */
+  .brushed {
+    position: relative;
+    isolation: isolate;
+  }
+  .brushed::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: url('/images/harjattu-metalli.webp') center / cover;
+    opacity: var(--brushed-opacity, 0.05);
+    mix-blend-mode: screen;
+    pointer-events: none;
+  }
+  .brushed-light::before {
+    mix-blend-mode: multiply;
+    opacity: var(--brushed-opacity, 0.22);
+  }
+
+  /* Hairline orange rim, as on the nameplate. */
+  .rim {
+    border: 1.5px solid var(--color-arc);
+  }
+
+  .btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    min-height: 3.25rem;
+    padding: 0.85rem 1.6rem;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 1rem;
+    line-height: 1.1;
+    letter-spacing: 0.005em;
+    transition:
+      background-color 0.35s var(--ease-out-expo),
+      color 0.35s var(--ease-out-expo),
+      border-color 0.35s var(--ease-out-expo),
+      transform 0.35s var(--ease-out-expo);
+    overflow: hidden;
+    isolation: isolate;
+  }
+  .btn svg {
+    flex: none;
+  }
+
+  /* Primary: the hot arc. A light streak passes on hover – a polishing pass. */
+  .btn-arc {
+    background: var(--color-arc);
+    color: #140702;
+  }
+  .btn-arc::after {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    z-index: -1;
+    background: linear-gradient(105deg, transparent 30%, rgb(255 255 255 / 0.55) 48%, transparent 64%);
+    transform: translateX(-110%);
+    transition: transform 0.7s var(--ease-out-expo);
+  }
+  .btn-arc:hover::after,
+  .btn-arc:focus-visible::after {
+    transform: translateX(110%);
+  }
+  .btn-arc:hover {
+    background: var(--color-arc-hot);
+  }
+
+  .btn-ghost {
+    border: 1.5px solid rgb(255 255 255 / 0.28);
+    color: #fff;
+  }
+  .btn-ghost:hover {
+    border-color: var(--color-arc);
+    color: var(--color-arc-hot);
+  }
+
+  .btn-dark {
+    background: var(--color-ink);
+    color: #fff;
+  }
+  .btn-dark:hover {
+    background: var(--color-steel-800);
+  }
+
+  .btn-outline-dark {
+    border: 1.5px solid rgb(11 12 14 / 0.3);
+    color: var(--color-ink);
+  }
+  .btn-outline-dark:hover {
+    border-color: var(--color-arc-deep);
+    color: var(--color-arc-deep);
+  }
+
+  /* Text link with an arc underline that is "welded" in on hover. */
+  .link-weld {
+    background-image: linear-gradient(currentColor, currentColor), linear-gradient(var(--color-arc), var(--color-arc));
+    background-size:
+      100% 1px,
+      0% 2px;
+    background-position:
+      0 100%,
+      0 100%;
+    background-repeat: no-repeat;
+    padding-bottom: 0.15em;
+    transition: background-size 0.5s var(--ease-out-expo);
+  }
+  .link-weld:hover,
+  .link-weld:focus-visible {
+    background-size:
+      100% 1px,
+      100% 2px;
+  }
+
+  /* Elliptical image frames – the nameplate shape as a window. */
+  .oval {
+    clip-path: ellipse(50% 50% at 50% 50%);
+  }
+
+  .divider-oval {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgb(255 255 255 / 0.18) 20%, rgb(255 255 255 / 0.18) 80%, transparent);
+  }
+
+  .prose-sarola p + p {
+    margin-top: 1em;
+  }
+}
+
+/* ---------- Reveal system (progressive: only hidden when JS is running) ---------- */
+html.js [data-reveal] {
+  opacity: 0;
+}
+html.js.no-motion [data-reveal],
+html.js [data-reveal].is-in {
+  opacity: 1;
+}
+
+/* Home intro: pending until the hero timeline takes over. Fails open after 4 s. */
+html.intro-pending [data-intro='hide'] {
+  opacity: 0;
+  animation: intro-failsafe 0.01s linear 4s forwards;
+}
+@keyframes intro-failsafe {
+  to {
+    opacity: 1;
+  }
+}
+
+/* Scroll story falls back to stacked chapters without motion. */
+html.no-motion .s2m-desktop {
+  display: none !important;
+}
+html.no-motion .s2m-stacked {
+  display: block !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  html.js [data-reveal] {
+    opacity: 1;
+  }
+}
