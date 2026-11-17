@@ -254,9 +254,9 @@ export function Hero() {
           </dl>
         </div>
 
-        <div className="relative order-1 mx-auto w-full max-w-[34rem] sm:max-w-[40rem] lg:order-2 lg:col-span-6 lg:max-w-none">
+        <div className="relative order-1 mx-auto w-full max-w-[34rem] sm:max-w-[36rem] lg:order-2 lg:col-span-6 lg:max-w-none">
           <div data-hero-frame className="relative">
-            <div ref={frame} className="relative aspect-square w-full sm:aspect-[6/5] lg:aspect-[11/12]">
+            <div ref={frame} className="relative mx-auto aspect-square w-full sm:aspect-[6/5] lg:aspect-[11/12] lg:w-[min(100%,calc((100svh-11rem)*0.9167))]">
               <div data-intro="hide" data-hero-photo className="absolute inset-0 overflow-hidden" style={{ clipPath: `ellipse(${FINAL_R}% ${FINAL_R}% at 50% 50%)` }}>
                 <Picture
                   slug="ristikkovanne-kiillotettu"
