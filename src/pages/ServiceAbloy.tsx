@@ -77,7 +77,13 @@ export function ServiceAbloy() {
           </div>
           <div>
             <dt className="label text-steel-500">Koneet</dt>
-            <dd className="mt-2 font-mono text-sm leading-relaxed text-steel-200">{abloyMachineNumbers.join(' · ')}</dd>
+            <dd className="mt-2 flex flex-wrap gap-x-3 gap-y-1 font-mono text-sm leading-relaxed text-steel-200">
+              {abloyMachineNumbers.map((n) => (
+                <span key={n} className="whitespace-nowrap">
+                  {n}
+                </span>
+              ))}
+            </dd>
           </div>
         </dl>
       </PageHero>
