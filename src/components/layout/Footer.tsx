@@ -4,7 +4,6 @@ import { LogoPlate } from '../brand/LogoPlate'
 import { company } from '../../data/company'
 import { mainNav } from '../../data/seo'
 import { services } from '../../data/services'
-import { scrollTopNow } from './ScrollManager'
 
 export function Footer() {
   return (
@@ -12,7 +11,7 @@ export function Footer() {
       <div className="shell">
         <div className="grid gap-14 lg:grid-cols-12">
           <div className="lg:col-span-5">
-            <Link to="/" onClick={scrollTopNow} className="inline-block rounded-[50%]" aria-label="Etusivulle">
+            <Link to="/" className="inline-block rounded-[50%]" aria-label="Etusivulle">
               <LogoPlate title={null} className="h-20 w-auto" />
             </Link>
             <p className="mt-8 max-w-md font-display text-[1.6rem] leading-snug text-white">
@@ -50,7 +49,7 @@ export function Footer() {
               <ul className="space-y-2.5">
                 {mainNav.map((n) => (
                   <li key={n.to}>
-                    <Link to={n.to} onClick={scrollTopNow} className="hover:text-white">
+                    <Link to={n.to} className="hover:text-white">
                       {n.label}
                     </Link>
                   </li>

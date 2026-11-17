@@ -4,7 +4,6 @@ import { ArrowUpRight, Mail, Phone } from 'lucide-react'
 import { mainNav } from '../../data/seo'
 import { services } from '../../data/services'
 import { company } from '../../data/company'
-import { scrollTopNow } from './ScrollManager'
 
 interface Props {
   open: boolean
@@ -50,10 +49,7 @@ export function MobileMenu({ open, onClose }: Props) {
     }
   }, [open, onClose])
 
-  const go = () => {
-    scrollTopNow()
-    onClose()
-  }
+  const go = () => onClose()
 
   return (
     <div

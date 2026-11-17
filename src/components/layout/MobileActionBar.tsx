@@ -15,7 +15,7 @@ export function MobileActionBar() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [pathname])
 
-  if (pathname === '/yhteystiedot') return null
+  if (pathname.replace(/\/+$/, '') === '/yhteystiedot') return null
 
   return (
     <div

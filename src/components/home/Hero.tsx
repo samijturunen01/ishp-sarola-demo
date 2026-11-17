@@ -277,6 +277,7 @@ export function Hero() {
               </div>
               <div
                 ref={plateWrap}
+                data-hero-plate
                 aria-hidden
                 className="pointer-events-none absolute left-1/2 top-1/2 z-20 w-[82%] max-w-[36rem] -translate-x-1/2 -translate-y-1/2 sm:w-[66%]"
                 style={{ opacity: 0 }}

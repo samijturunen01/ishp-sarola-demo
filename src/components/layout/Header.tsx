@@ -5,7 +5,6 @@ import { LogoPlate } from '../brand/LogoPlate'
 import { mainNav } from '../../data/seo'
 import { services } from '../../data/services'
 import { company } from '../../data/company'
-import { scrollTopNow } from './ScrollManager'
 import { MobileMenu } from './MobileMenu'
 
 export function Header() {
@@ -22,11 +21,13 @@ export function Header() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  // Close menus whenever the route changes.
-  useEffect(() => {
+  // Close menus whenever the route changes (state adjusted during render, no effect).
+  const [path, setPath] = useState(location.pathname)
+  if (path !== location.pathname) {
+    setPath(location.pathname)
     setMenuOpen(false)
     setServicesOpen(false)
-  }, [location.pathname])
+  }
 
   // Services dropdown: close on outside click / Escape.
   useEffect(() => {
@@ -62,7 +63,7 @@ export function Header() {
         <div className="shell flex h-[4.5rem] items-center justify-between gap-6 lg:h-[5.25rem]">
           <Link
             to="/"
-            onClick={scrollTopNow}
+           
             className="group relative -ml-1 block shrink-0 rounded-[50%] p-1"
             aria-label="Itä-Suomen Huoltopalvelu Sarola – etusivulle"
           >
@@ -76,7 +77,7 @@ export function Header() {
                   <li key={item.to} ref={servicesRef} className="relative flex items-center">
                     <NavLink
                       to={item.to}
-                      onClick={scrollTopNow}
+                     
                       className={() => navClass(servicesActive)}
                     >
                       <NavLabel label={item.label} active={servicesActive} />
@@ -101,7 +102,7 @@ export function Header() {
                           <li key={s.key}>
                             <NavLink
                               to={s.path}
-                              onClick={scrollTopNow}
+                             
                               className={({ isActive }) =>
                                 `group flex items-baseline gap-4 rounded-2xl px-4 py-3 transition-colors hover:bg-white/5 ${
                                   isActive ? 'bg-white/[0.06]' : ''
@@ -121,7 +122,7 @@ export function Header() {
                   </li>
                 ) : (
                   <li key={item.to}>
-                    <NavLink to={item.to} end={item.to === '/'} onClick={scrollTopNow} className={({ isActive }) => navClass(isActive)}>
+                    <NavLink to={item.to} end={item.to === '/'} className={({ isActive }) => navClass(isActive)}>
                       {({ isActive }) => <NavLabel label={item.label} active={isActive} />}
                     </NavLink>
                   </li>

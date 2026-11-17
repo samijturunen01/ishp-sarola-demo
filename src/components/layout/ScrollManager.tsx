@@ -18,6 +18,7 @@ export function ScrollManager() {
   const navType = useNavigationType()
   // Compare history keys (not a "first run" flag) so StrictMode's double effects stay idempotent.
   const initialKey = useRef(location.key)
+  const lastPath = useRef(location.pathname)
 
   useIsoLayoutEffect(() => {
     if ('scrollRestoration' in history) history.scrollRestoration = 'manual'
@@ -46,13 +47,20 @@ export function ScrollManager() {
 
   useIsoLayoutEffect(() => {
     if (location.key === initialKey.current && !introState.navigated) {
-      if (location.hash) scrollToHash(location.hash)
+      if (location.hash) scrollToHashAfterLayout(location.hash, false)
       return
     }
     introState.navigated = true
+    const samePage = lastPath.current === location.pathname
+    lastPath.current = location.pathname
 
     if (navType === 'POP') {
-      const y = positions.get(location.key) ?? 0
+      const saved = positions.get(location.key)
+      if (saved === undefined && location.hash) {
+        scrollToHashAfterLayout(location.hash, samePage)
+        return
+      }
+      const y = saved ?? 0
       window.scrollTo({ top: y, left: 0, behavior: 'instant' })
       // Pinned sections change document height – re-apply after triggers refresh.
       requestAnimationFrame(() => {
@@ -63,7 +71,7 @@ export function ScrollManager() {
     }
 
     if (location.hash) {
-      requestAnimationFrame(() => scrollToHash(location.hash))
+      scrollToHashAfterLayout(location.hash, samePage)
       return
     }
     window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
@@ -73,17 +81,27 @@ export function ScrollManager() {
   return null
 }
 
-function scrollToHash(hash: string) {
+function scrollToHash(hash: string, smooth = false) {
   const el = document.getElementById(decodeURIComponent(hash.slice(1)))
   if (!el) return
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-  el.scrollIntoView({ behavior: reduce ? 'instant' : 'smooth', block: 'start' })
+  el.scrollIntoView({ behavior: smooth && !reduce ? 'smooth' : 'instant', block: 'start' })
 }
 
 /**
- * For main navigation links: always land at the top of the destination –
- * including when the visitor clicks the link of the page they are already on.
+ * Same page → smooth scroll to the section. New page → jump straight to the
+ * section once layout and scroll triggers have settled (no visible scrolling).
  */
-export function scrollTopNow() {
-  window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
+function scrollToHashAfterLayout(hash: string, samePage: boolean) {
+  if (samePage) {
+    scrollToHash(hash, true)
+    return
+  }
+  scrollToHash(hash)
+  requestAnimationFrame(() =>
+    requestAnimationFrame(() => {
+      ScrollTrigger.refresh()
+      scrollToHash(hash)
+    }),
+  )
 }

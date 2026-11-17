@@ -26,6 +26,10 @@ export function Layout() {
     <>
       <a
         href="#sisalto"
+        onClick={(e) => {
+          e.preventDefault()
+          mainRef.current?.focus()
+        }}
         className="fixed left-3 top-3 z-[100] -translate-y-24 rounded-full bg-arc px-5 py-3 font-semibold text-ink transition-transform focus:translate-y-0"
       >
         Siirry sisältöön

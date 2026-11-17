@@ -80,6 +80,9 @@ export function GalleryStrip() {
       <div className="mt-16 space-y-6 md:space-y-8">
         <div
           data-row="a"
+          role="region"
+          aria-label="Kiillotettuja töitä – vieritä sivusuunnassa"
+          tabIndex={0}
           className="flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-2 [scrollbar-width:none] md:snap-none md:gap-6 md:overflow-visible md:px-[6vw] md:pb-0"
         >
           {rowA.map((r) => (
