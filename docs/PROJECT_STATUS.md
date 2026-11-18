@@ -70,6 +70,10 @@ section rhythm, the ellipse as its window/frame shape, and the orange as a thin 
   the hero photo is the LCP element and is revealed by the intro (accepted trade-off of the
   mandatory signature intro; the page is interactive and skippable immediately).
   Homepage HTML 163 kB raw / 31 kB gzip (logo outlines are inlined in header, intro, menu, footer).
+* Live site (same throttling, gzip from GitHub Pages): FCP 0.7–1.0 s, subpage LCP 0.74–0.83 s,
+  homepage LCP 2.7 s (intro), CLS ≤ 0.002, transfer 610–890 kB per page.
+* Live Playwright run (`LIVE_URL=https://samijturunen01.github.io npm test`) – 86 passed, 2 skipped.
+* CI note: actions/deploy-pages@v4 prints a Node 20 deprecation notice (runs on Node 24, harmless).
 
 ## Known issues / open questions for the customer
 - New Oy (3667108-4, registered 29.10.2026) vs. sole-proprietor Y-tunnus 2400653-8 shown on site.
