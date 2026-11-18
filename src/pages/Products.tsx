@@ -1,9 +1,10 @@
 import { Link } from 'react-router-dom'
-import { ArrowRight, Download, KeyRound } from 'lucide-react'
+import { ArrowRight, Download } from 'lucide-react'
 import { PageHero } from '../components/ui/PageHero'
 import { GritScale } from '../components/service/GritScale'
 import { Picture } from '../components/ui/Picture'
 import { ContactCta } from '../components/ui/ContactCta'
+import { KeyProfile } from '../components/art/KeyProfile'
 import { abloyDocs } from '../data/abloy'
 
 export function Products() {
@@ -85,16 +86,25 @@ export function Products() {
       {/* Sento */}
       <section aria-labelledby="sento" className="bg-ink-2 py-24 sm:py-28">
         <div className="shell">
-          <div className="relative overflow-hidden rounded-[2.4rem] border border-white/10 p-8 sm:p-14">
-            <div aria-hidden className="pointer-events-none absolute -right-24 -top-24 aspect-[228/90] w-[36rem] rounded-[50%] border-[1.5px] border-arc/40" />
-            <KeyRound size={34} aria-hidden className="text-arc" />
-            <h2 id="sento" className="display-md mt-6 max-w-[18ch] text-white">
-              Sento-avainkoneet kotimaisella laadulla.
-            </h2>
-            <p className="mt-5 max-w-xl text-steel-300">Avainkoneiden myynti, huolto ja varaosat samasta paikasta. Kysy lisää Sento-avainkoneista.</p>
-            <Link to="/yhteystiedot?palvelu=sento#tarjouspyynto" className="btn btn-ghost mt-8">
-              Kysy Sento-avainkoneista <ArrowRight size={18} aria-hidden />
-            </Link>
+          <div className="relative grid items-center gap-10 overflow-hidden rounded-[2.4rem] border border-white/10 p-8 sm:p-14 lg:grid-cols-12 lg:gap-8">
+            <div aria-hidden className="pointer-events-none absolute -bottom-40 -right-28 -z-0 h-[30rem] w-[44rem] rounded-[50%] bg-[radial-gradient(closest-side,rgb(255_98_41/0.10),transparent)]" />
+            <div className="relative lg:col-span-5">
+              <p className="label text-arc" data-reveal>
+                Avainkoneet
+              </p>
+              <h2 id="sento" className="display-md mt-5 max-w-[18ch] text-white" data-reveal>
+                Sento-avainkoneet kotimaisella laadulla.
+              </h2>
+              <p className="mt-5 max-w-xl text-steel-300" data-reveal data-delay="0.08">
+                Avainkoneiden myynti, huolto ja varaosat samasta paikasta. Kysy lisää Sento-avainkoneista.
+              </p>
+              <Link to="/yhteystiedot?palvelu=sento#tarjouspyynto" className="btn btn-ghost mt-8">
+                Kysy Sento-avainkoneista <ArrowRight size={18} aria-hidden />
+              </Link>
+            </div>
+            <div className="relative -mx-4 sm:mx-0 lg:col-span-7" data-reveal="fade">
+              <KeyProfile className="mx-auto block h-auto w-full max-w-[40rem]" />
+            </div>
           </div>
         </div>
       </section>

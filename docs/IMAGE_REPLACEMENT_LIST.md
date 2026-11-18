@@ -12,7 +12,7 @@ few additional photos that would lift the production site further.
 | TIG-hitsaus – material swatches | Abstract metal gradients ("Havainnekuvat") | Close-ups of real TIG welds on aluminium, RST and HST | ≥ 1600 × 2000 px, portrait 4:5 | Macro of the weld bead with heat tint | No – optional |
 | TIG-hitsaus – action | Finished-work photos only | Welder at work with arc visible (with face shield) | ≥ 2400 px wide | Dark background, arc as the light source – fits the "spark" concept | Recommended |
 | Tuotteet – Tuvel-hiomaliuskat | Interactive grit-scale illustration | Product photo of Tuvel strips (several grits fanned out) | ≥ 2000 × 2000 px, square | On the brushed-steel background | Recommended |
-| Products – Sento-avainkoneet | Icon only | Photo of a Sento key machine | ≥ 2000 px, landscape | Studio-style on neutral background | Recommended |
+| Products – Sento-avainkoneet | Abstract key-profile illustration (`KeyProfile.tsx`) | Photo of a Sento key machine | ≥ 2000 px, landscape | Studio-style on neutral background | Recommended |
 
 All existing photos are phone photos (good resolution, 3000–4600 px). A short professional shoot
 (half a day) covering the rows marked "Recommended" would complete the visual story.

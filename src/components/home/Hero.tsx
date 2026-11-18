@@ -210,13 +210,13 @@ export function Hero() {
         aria-hidden
         className="pointer-events-none absolute -right-[10%] top-[8%] -z-10 h-[70vmax] w-[70vmax] rounded-full bg-[radial-gradient(closest-side,rgb(255_98_41/0.14),transparent)]"
       />
-      <div className="shell grid min-h-[100svh] items-center gap-y-8 pb-16 pt-24 lg:grid-cols-12 lg:gap-x-10 lg:pb-20 lg:pt-28">
+      <div className="shell grid min-h-[100svh] items-center gap-y-6 pb-16 pt-[5.5rem] sm:gap-y-8 sm:pt-24 lg:grid-cols-12 lg:gap-x-10 lg:pb-20 lg:pt-28">
         <div data-hero-copy className="relative z-10 order-2 lg:order-1 lg:col-span-6 xl:col-span-6">
           <p data-intro="hide" className="label flex flex-wrap items-center gap-x-3 gap-y-1 text-steel-400">
             <span className="inline-block h-[7px] w-[12px] rounded-[50%] border-[1.5px] border-arc" aria-hidden />
             Joensuu · Käpykangas · vuodesta {company.founded}
           </p>
-          <h1 id="hero-title" className="display-xl mt-6 text-white">
+          <h1 id="hero-title" className="display-xl mt-5 text-white sm:mt-6">
             <span className="block overflow-hidden pb-[0.06em]">
               <span data-hero-line className="block">
                 Yksi soitto,
@@ -228,11 +228,11 @@ export function Hero() {
               </span>
             </span>
           </h1>
-          <p data-intro="hide" className="lead mt-7 max-w-[36rem] text-steel-300">
+          <p data-intro="hide" className="lead mt-5 max-w-[36rem] text-steel-300 sm:mt-7">
             Koneistamme, hitsaamme, kiillotamme ja huollamme – Abloy-avainjyrsinkoneista Teknos-sävytyskoneisiin ja
             yksittäisestä varaosasta sarjatuotantoon.
           </p>
-          <div data-intro="hide" className="mt-9 flex flex-wrap gap-3">
+          <div data-intro="hide" className="mt-7 flex flex-wrap gap-3 sm:mt-9">
             <Link to="/yhteystiedot#tarjouspyynto" className="btn btn-arc">
               Pyydä tarjous <ArrowRight size={18} aria-hidden />
             </Link>
@@ -256,7 +256,7 @@ export function Hero() {
 
         <div className="relative order-1 mx-auto w-full max-w-[34rem] sm:max-w-[36rem] lg:order-2 lg:col-span-6 lg:max-w-none">
           <div data-hero-frame className="relative">
-            <div ref={frame} className="relative mx-auto aspect-square w-full sm:aspect-[6/5] lg:aspect-[11/12] lg:w-[min(100%,calc((100svh-11rem)*0.9167))]">
+            <div ref={frame} className="relative mx-auto aspect-[4/3] w-full sm:aspect-[6/5] lg:aspect-[11/12] lg:w-[min(100%,calc((100svh-11rem)*0.9167))]">
               <div data-intro="hide" data-hero-photo className="absolute inset-0 overflow-hidden" style={{ clipPath: `ellipse(${FINAL_R}% ${FINAL_R}% at 50% 50%)` }}>
                 <Picture
                   slug="ristikkovanne-kiillotettu"
@@ -285,7 +285,7 @@ export function Hero() {
                 <IntroPlate ref={plate} />
               </div>
             </div>
-            <p data-intro="hide" className="label mt-5 text-center text-steel-500 md:mt-12">
+            <p data-intro="hide" className="label mt-3 text-center text-steel-500 sm:mt-5 md:mt-12">
               Kiillotettu ristikkovanne · 10/2024
             </p>
           </div>
